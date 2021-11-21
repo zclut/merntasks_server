@@ -16,22 +16,20 @@ exports.loginUser = async (req, res) => {
 
     try {
         // Check if the user already exists
-        let user = await User.findOne({ email });
+        let user = await User.findOne({ email }).populate('roles');
 
-        if (!user) {
-            return res.status(400).json({ msg: 'El usuario no existe.' });
-        }
+        if (!user) return res.status(400).json({ msg: 'El usuario no existe.' });
+        
 
         // Check if the password is correct
         const isMatch = await bcryptjs.compare(password, user.password);
-        if (!isMatch) {
-            return res.status(400).json({ msg: 'La contraseña es incorrecta.' });
-        }
-
+        if (!isMatch) return res.status(400).json({ msg: 'La contraseña es incorrecta.' });
+        
         // Create and sign (jwt)
         const payload = {
             user: {
-                id: user.id
+                id: user.id,
+                roles: user.roles
             }
         };
 

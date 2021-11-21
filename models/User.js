@@ -17,10 +17,15 @@ const UserSchema = mongoose.Schema({
         required: true,
         trim: true
     },
-    created_at: {
-        type: Date,
-        default: Date.now
-    },
-});
+    roles: [{
+        ref: 'Role',
+        type: mongoose.Schema.Types.ObjectId,
+    }]
+},
+    {
+        timestamps: true,
+        versionKey: false
+    }
+);
 
 module.exports = mongoose.model('User', UserSchema);

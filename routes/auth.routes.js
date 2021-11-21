@@ -3,7 +3,7 @@ const express = require('express');
 const { check } = require('express-validator');
 const router = express.Router();
 
-const authController = require('../controllers/authController');
+const authController = require('../controllers/auth.controller');
 
 // Create a new user | api/auth
 router.post('/',

@@ -1,18 +1,24 @@
 const express = require('express');
 const connectDB = require('./config/db');
 
+const createRoles = require('./libs/initialSetup');
+
 // Create the server and connect to the database
 const app = express();
 const PORT = process.env.PORT || 4000;
 connectDB();
 
+// Create roles
+createRoles();
+
+
 // Enable express.json
 app.use(express.json({ extended: true }));
 
 // Import routes
-app.use('/api/users', require('./routes/users'));
-app.use('/api/auth', require('./routes/auth'));
-app.use('/api/projects', require('./routes/projects'));
+app.use('/api/users', require('./routes/users.routes'));
+app.use('/api/auth', require('./routes/auth.routes'));
+app.use('/api/projects', require('./routes/projects.routes'));
 
 
 // Run server

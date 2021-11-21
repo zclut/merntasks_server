@@ -11,10 +11,11 @@ const ProjectSchema = mongoose.Schema({
         ref: 'User',
         required: true
     },
-    created_at: {
-        type: Date,
-        default: Date.now
+},
+    {
+        timestamps: true,
+        versionKey: false
     }
-});
+);
 
 module.exports = mongoose.model('Project', ProjectSchema);

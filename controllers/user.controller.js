@@ -2,7 +2,9 @@ const bcryptjs = require('bcryptjs');
 const { validationResult } = require('express-validator');
 const jwt = require('jsonwebtoken');
 
+const Role = require('../models/Role');
 const User = require('../models/User');
+
 
 exports.createUser = async (req, res) => {
 
@@ -13,7 +15,7 @@ exports.createUser = async (req, res) => {
     }
 
     // Extract the user data from the request body
-    const { email, password } = req.body;
+    const { email, password, roles } = req.body;
 
     try {
         // Check if the user already exists
@@ -28,12 +30,22 @@ exports.createUser = async (req, res) => {
         const salt = await bcryptjs.genSalt(10);
         user.password = await bcryptjs.hash(password, salt);
 
+        // Check the roles
+        if (roles) {
+            const foundRoles = await Role.find({name: {$in: roles}});
+            user.roles = foundRoles.map(role => role._id);
+        } else {
+            const role = await Role.findOne({ name: 'user' });
+            user.roles = [role._id];
+        }
+
         // Save and sign (jwt) the new user
         await user.save();
 
         const payload = {
             user: {
-                id: user.id
+                id: user.id,
+                roles: user.roles
             }
         };
 

@@ -3,12 +3,12 @@ const express = require('express');
 const { check } = require('express-validator');
 const router = express.Router();
 
-const auth = require('../middlewares/auth');
-const projectsController = require('../controllers/projectController');
+const {verifyToken} = require('../middlewares/auth');
+const projectsController = require('../controllers/project.controller');
 
 // Create a new project | api/projects
 router.post('/',
-    auth,
+    verifyToken,
     [
         check('name', 'El nombre es obligatorio').not().isEmpty()
     ],
@@ -17,13 +17,13 @@ router.post('/',
 
 // Get all projects | api/projects
 router.get('/',
-    auth,
+    verifyToken,
     projectsController.getProjects
 );
 
 // Update a project | api/projects/:id
 router.put('/:id',
-    auth,
+    verifyToken,
     [
         check('name', 'El nombre del proyecto es obligatorio').not().isEmpty()
     ],
@@ -32,7 +32,7 @@ router.put('/:id',
 
 // Delete a project | api/projects/:id
 router.delete('/:id',
-    auth,
+    verifyToken,
     [
         check('name', 'El nombre del proyecto es obligatorio').not().isEmpty()
     ],

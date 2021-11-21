@@ -1,0 +1,31 @@
+{
+  "name": "merntaskserver",
+  "version": "1.0.0",
+  "description": "MERN API to MERNTasks",
+  "main": "index.js",
+  "scripts": {
+    "start": "node .",
+    "dev": "nodemon ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zclut/merntasks_server.git"
+  },
+  "author": "zClut",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zclut/merntasks_server/issues"
+  },
+  "homepage": "https://github.com/zclut/merntasks_server#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "express-validator": "^6.13.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.0.13"
+  }
+}

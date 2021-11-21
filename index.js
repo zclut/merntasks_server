@@ -1,5 +1,6 @@
 const express = require('express');
 const connectDB = require('./config/db');
+const cors = require('cors');
 
 const createRoles = require('./libs/initialSetup');
 
@@ -7,6 +8,9 @@ const createRoles = require('./libs/initialSetup');
 const app = express();
 const PORT = process.env.PORT || 4000;
 connectDB();
+
+// Enable CORS
+app.use(cors());
 
 // Create roles
 createRoles();

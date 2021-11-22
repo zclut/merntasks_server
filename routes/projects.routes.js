@@ -33,9 +33,6 @@ router.put('/:id',
 // Delete a project | api/projects/:id
 router.delete('/:id',
     verifyToken,
-    [
-        check('name', 'El nombre del proyecto es obligatorio').not().isEmpty()
-    ],
     projectsController.deleteProject
 );
 

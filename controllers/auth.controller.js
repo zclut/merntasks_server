@@ -44,3 +44,15 @@ exports.loginUser = async (req, res) => {
         console.log(error);
     }
 };
+
+// Get the user authenticated
+exports.getAuthUser = async (req, res) => {
+    try {
+        // Get the user from the request and populate the roles and exclude the password
+        const user = await User.findById(req.user.id).populate('roles').select('-password');
+        res.json({ user });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json('Hubo un error');
+    }
+};

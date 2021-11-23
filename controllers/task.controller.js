@@ -77,8 +77,8 @@ exports.updateTask = async (req, res) => {
 
         // Create the task with the new data
         const newTask = {};
-        if (name) newTask.name = name;
-        if (status || !status) newTask.status = status;
+        newTask.name = name;
+        newTask.status = status;
 
         // Update the task
         task = await Task.findOneAndUpdate({ _id: req.params.id }, newTask, { new: true });
@@ -95,7 +95,7 @@ exports.deleteTask = async (req, res) => {
 
     try {
         // Extract the project, name, status and check if it exists
-        const { project } = req.body;
+        const { project } = req.query
 
         // Check if the task exists
         let task = await Task.findById(req.params.id);

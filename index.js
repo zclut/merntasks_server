@@ -10,7 +10,12 @@ const port = process.env.port || 4000;
 connectDB();
 
 // Enable CORS
-app.use(cors());
+app.use(cors(
+    {
+        credentials: true,
+        origin: [process.env.FRONTEND_APP_URL],
+    }
+));
 
 // Create roles
 createRoles();

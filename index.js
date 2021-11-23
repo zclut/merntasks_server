@@ -6,7 +6,7 @@ const createRoles = require('./libs/initialSetup');
 
 // Create the server and connect to the database
 const app = express();
-const PORT = process.env.PORT || 4000;
+const port = process.env.port || 4000;
 connectDB();
 
 // Enable CORS
@@ -27,6 +27,6 @@ app.use('/api/tasks', require('./routes/tasks.routes'));
 
 
 // Run server
-app.listen(PORT, () => {
-    console.log(`Listening on port ${PORT}`);
+app.listen(port, '0.0.0.0', () => {
+    console.log(`Listening on port ${port}`);
 })

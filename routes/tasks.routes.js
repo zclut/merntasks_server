@@ -17,7 +17,7 @@ router.post('/',
 );
 
 // Get all tasks in project | api/tasks/:project
-router.get('/:projectId',
+router.get('/',
     verifyToken,
     taskController.getTasks
 );

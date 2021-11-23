@@ -37,14 +37,16 @@ exports.getTasks = async (req, res) => {
 
     try {
         // Extract the project and check if it exists
-        const projectExists = await Project.findById(req.params.projectId);
+        const { project } = req.query;
+
+        const projectExists = await Project.findById(project);
         if (!projectExists) return res.status(404).json({ msg: 'Proyecto no encontrado' });
 
         // Check if current project belongs to authenticated user
         if (projectExists.user.toString() !== req.user.id) return res.status(401).json({ msg: 'No autorizado.' });
 
-        // Get all tasks in the project and populate the user and project
-        const tasks = await Task.find({ projectExists }).populate('project');
+        // Get all tasks if exists in the projectExists
+        const tasks = await Task.find({ project }).sort({ date: -1 });
         res.json({ tasks });
     } catch (error) {
         console.log(error);

@@ -6,15 +6,15 @@ const createRoles = require('./libs/initialSetup');
 
 // Create the server and connect to the database
 const app = express();
+const port = process.env.port || 4000;
+connectDB();
 
 // Enable CORS
 app.use(cors());
 
-const port = process.env.port || 4000;
-connectDB();
-
 // Create roles
 createRoles();
+
 
 // Enable express.json
 app.use(express.json({ extended: true }));

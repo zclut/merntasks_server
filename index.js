@@ -12,7 +12,6 @@ connectDB();
 // Enable CORS
 app.use(cors(
     {
-        credentials: true,
         origin: [process.env.FRONTEND_APP_URL],
     }
 ));
